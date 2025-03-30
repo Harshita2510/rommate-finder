@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html> -->
+<!-- <html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -87,7 +87,7 @@
                     <div class="info">
                         <span>Location: ${property.location}</span>
                         <span>Price: ₹${property.price}</span>
-                        <span>${property.bhk} BHK</span>
+                        <span>${property.bhk} BHK</span>a
                         <span>Beds: ${property.beds || 'N/A'}</span>
                         <span>Rooms: ${property.rooms || 'N/A'}</span>
                         <span>Availability: ${property.availability}</span>
@@ -104,6 +104,314 @@
 
         fetchProperties();
     </script>
+</body>
+
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Property Listings</title>
+  <style>
+    /* ====== General Reset & Body ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    /* ====== Header Styling ====== */
+    .header {
+      background-color: #f44336;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* ====== Main Container: holds filters on left + listings on right ====== */
+    .main-container {
+      display: flex;
+      width: 90%;
+      margin: 20px auto;
+      gap: 20px;
+    }
+
+    /* ====== Filter Section ====== */
+    .filter-section {
+      flex: 0 0 250px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+    }
+
+    .filter-section h2 {
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+
+    .filter-group {
+      margin-bottom: 20px;
+    }
+
+    .filter-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .filter-group input[type="text"],
+    .filter-group input[type="range"] {
+      width: 100%;
+      padding: 6px;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .filter-group .range-value {
+      display: inline-block;
+      margin-top: 5px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .filter-section button {
+      background-color: #f44336;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .filter-section button:hover {
+      background-color: #d32f2f;
+    }
+
+    /* ====== Listing Section ====== */
+    .listing-section {
+      flex: 1;
+    }
+
+    /* ====== Property Cards ====== */
+    .card {
+      display: flex;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      overflow: hidden;
+      padding: 15px;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .card img {
+      width: 250px;
+      height: 180px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .details {
+      flex: 1;
+    }
+
+    .details h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .info span {
+      background: #f0f0f0;
+      padding: 5px 10px;
+      border-radius: 15px;
+    }
+
+    /* Contact Broker Button (optional) */
+    .contact-broker-btn {
+      display: inline-block;
+      background-color: #f44336;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .contact-broker-btn:hover {
+      background-color: #d32f2f;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+
+      .filter-section {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      .card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .card img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== Header ===== -->
+  <div class="header">Property Listings</div>
+
+  <!-- ===== Main Container (Filters + Listings) ===== -->
+  <div class="main-container">
+
+    <!-- ===== Filter Section ===== -->
+    <div class="filter-section">
+      <h2>Filters</h2>
+
+      <!-- Location Search -->
+      <div class="filter-group">
+        <label for="locationSearch">Search by Location:</label>
+        <input type="text" id="locationSearch" placeholder="e.g. Whitefield" />
+      </div>
+
+      <!-- Price Range -->
+      <div class="filter-group">
+        <label for="priceRange">Max Price:</label>
+        <input type="range" id="priceRange" min="0" max="200000" step="1000" value="200000" />
+        <span class="range-value" id="priceValue">200000</span>
+      </div>
+
+      <!-- Apply Filter Button -->
+      <div class="filter-group">
+        <button id="filterBtn">Apply Filters</button>
+      </div>
+    </div>
+
+    <!-- ===== Listing Section ===== -->
+    <div class="listing-section">
+      <div id="property-container"></div>
+    </div>
+  </div>
+
+  <script>
+    // Global variable to store all fetched properties
+    let allProperties = [];
+
+    // ========== Original fetch function ==========
+    async function fetchProperties() {
+      try {
+        const response = await fetch("http://localhost:3019/get-properties");
+        const properties = await response.json();
+        // Save the data for filtering
+        allProperties = properties;
+        // Render the full list on first load
+        renderProperties(allProperties);
+      } catch (error) {
+        console.error("Error fetching properties:", error);
+      }
+    }
+
+    // ========== Render Properties ==========
+    function renderProperties(properties) {
+      const container = document.getElementById("property-container");
+      container.innerHTML = "";
+      properties.forEach(property => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.innerHTML = `
+          <img src="http://localhost:3019/uploads/${property.image}" alt="Property Image">
+          <div class="details">
+              <h2>${property.propertyName}</h2>
+              <div class="info">
+                  <span>Location: ${property.location}</span>
+                  <span>Price: ₹${property.price}</span>
+                  <span>${property.bhk || 'N/A'} BHK</span>
+                  <span>Beds: ${property.beds || 'N/A'}</span>
+                  <span>Rooms: ${property.rooms || 'N/A'}</span>
+                  <span>Availability: ${property.availability}</span>
+                  <span>Services: ${property.services || 'N/A'}</span>
+              </div>
+              <a href="#" class="contact-broker-btn">Contact Broker</a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // ========== Filter Logic ==========
+    function applyFilters() {
+      const locationSearch = document.getElementById("locationSearch").value.toLowerCase().trim();
+      const maxPrice = parseInt(document.getElementById("priceRange").value);
+
+      // Filter the properties based on location and price
+      let filtered = allProperties.filter(p => {
+        const matchesLocation = locationSearch
+          ? (p.location && p.location.toLowerCase().includes(locationSearch))
+          : true;
+        const matchesPrice = parseInt(p.price) <= maxPrice;
+        return matchesLocation && matchesPrice;
+      });
+
+      renderProperties(filtered);
+    }
+
+    // ========== Event Listeners ==========
+    // On clicking the Apply Filters button
+    document.getElementById("filterBtn").addEventListener("click", applyFilters);
+    // Automatically filter on location input changes
+    document.getElementById("locationSearch").addEventListener("input", applyFilters);
+    // Update label and automatically filter on price range change
+    document.getElementById("priceRange").addEventListener("input", (e) => {
+      document.getElementById("priceValue").textContent = e.target.value;
+      applyFilters();
+    });
+
+    // ========== Initial Fetch ==========
+    fetchProperties();
+  </script>
 </body>
 
 </html>
