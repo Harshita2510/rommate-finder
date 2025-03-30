@@ -250,38 +250,45 @@ button:hover {
     
             // 🔹 Fetch user data when "Update" is clicked
             document.getElementById("updateBtn").addEventListener("click", async function (event) {
-                event.preventDefault(); // Prevent default form submission
-    
-                const name = document.getElementById("name").value.trim();
-                if (!name) {
-                    alert("Please enter a name to fetch details.");
-                    return;
-                }
-    
-                try {
-                    const response = await fetch(`http://localhost:3019/getUser?name=${name}`)
-                    console.log(response)
-                    const userData = await response.json();
-                    console.log(userData)
-    // edited by Ekay
-                    if (response.ok) {
-                        // ✅ Fill form with fetched data
-                        document.getElementById("gender").value = userData.gender || "";
-                        document.getElementById("hobby").value = userData.hobby || "";
-                        document.getElementById("course").value = userData.course || "";
-                        document.getElementById("food").value = userData.food || "";
-                        document.getElementById("bhk").value = userData.bhk || "";
-                        document.getElementById("type").value = userData.type || "";
-                        document.getElementById("note").value = userData.note || "";
-                    } else {
-                        alert("User not found. Please enter details to create a new record.");
-                    }
-                } catch (error) {
-                    console.error("Error fetching user data:", error);
-                    alert("Error fetching user data. Please try again.");
-                }
-            });
-    
+    event.preventDefault(); // Prevent default form submission
+
+    const name = document.getElementById("name").value.trim();
+    if (!name) {
+        alert("Please enter a name to fetch details.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:3019/getUser?name=${name}`);
+        console.log("Raw response:", response); // Debugging log
+
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+
+        const responseData = await response.json(); // ✅ Only call json() ONCE
+        console.log("Parsed JSON response:", responseData); // Debugging log
+
+        if (responseData && responseData.data) {
+            const userData = responseData.data;
+            
+            // ✅ Fill form with fetched data
+            document.getElementById("gender").value = userData.gender || "";
+            document.getElementById("hobby").value = userData.hobby || "";
+            document.getElementById("course").value = userData.course || "";
+            document.getElementById("food").value = userData.food || "";
+            document.getElementById("bhk").value = userData.bhk || "";
+            document.getElementById("type").value = userData.type || "";
+            document.getElementById("note").value = userData.note || "";
+        } else {
+            alert("User not found. Please enter details to create a new record.");
+        }
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+        alert("Error fetching user data. Please try again.");
+    }
+});
+
             // 🔹 Handle form submission (create or update)
             form.addEventListener("submit", async function (event) {
                 event.preventDefault();
