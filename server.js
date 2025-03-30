@@ -113,8 +113,8 @@ app.post("/register", async (req, res) => {
 
     const newUser = new User({ username, password, mobile, email, place });
     await newUser.save();
+
     console.log("✅ User registered:", username);
-    // console.log("Received registration request:", req.body);
 
     res.json({ message: "Registration successful", redirect: "login.html" });
   } catch (error) {
@@ -122,6 +122,8 @@ app.post("/register", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+
 
 // Broker Registration
 app.post("/brokerx", async (req, res) => {
@@ -258,6 +260,7 @@ const roommateSchema = new mongoose.Schema({
   bhk: String,
   type: String,
   note: String,
+  user_id:String
 });
 const Roommate = mongoose.model("Roommate", roommateSchema);
 
@@ -279,62 +282,71 @@ const Roommate = mongoose.model("Roommate", roommateSchema);
 // Modified /submit route to update existing document
 app.post("/submit", async (req, res) => {
   try {
+    console.log(req.body)
     const { name, gender, hobby, course, food, bhk, type, note } = req.body;
+   
 
     // Check if a document with this username already exists
-    const existingUser = await Roommate.findOne({ name });
+    let existingUser = await Roommate.findOne({ name });
 
     if (existingUser) {
-      // Update existing document
-      existingUser.gender = gender;
-      existingUser.hobby = hobby;
-      existingUser.course = course;
-      existingUser.food = food;
-      existingUser.bhk = bhk;
-      existingUser.type = type;
-      existingUser.note = note;
+      // If user exists, return their data to pre-fill the form
+      console.log("✅ User found:", name);
+      return res.json({
+        message: "User data retrieved",
+        data: existingUser,
+      });
+    } 
 
-      await existingUser.save();
-      console.log("✅ User updated:", name);
-      res.json({
-        message: "Preferences updated successfully",
-        redirect: "roommateFilter.html",
-      });
-    } else {
-      // Create new document if not found
-      const newUser = new Roommate({
-        name,
-        gender,
-        hobby,
-        course,
-        food,
-        bhk,
-        type,
-        note,
-      });
-      await newUser.save();
-      console.log("✅ New user registered:", name);
-      res.json({
-        message: "Registration successful",
-        redirect: "roommateFilter.html",
-      });
-    }
+    // If user does not exist, create a new entry
+    const newUser = new Roommate({
+      name,
+      gender,
+      hobby,
+      course,
+      food,
+      bhk,
+      type,
+      note,
+    });
+
+    await newUser.save();
+    console.log("✅ New user registered:", name);
+
+    res.json({
+      message: "Registration successful",
+      data: newUser,
+    });
+
   } catch (error) {
     console.error("❌ Error processing request:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
 
-// Get All Roommates
-app.get("/roommates", async (req, res) => {
+app.get("/getUser", async (req, res) => {
   try {
-    const roommates = await Roommate.find();
-    res.json(roommates);
+      const { name } = req.query;
+
+      if (!name) {
+          return res.status(400).json({ error: "Name is required" });
+      }
+
+      const user = await Roommate.findOne({ name });
+
+      if (!user) {
+          return res.status(404).json({ error: "User not found" });
+      }
+
+      res.json({ message: "User found", data: user });
+
   } catch (error) {
-    console.error("❌ Error fetching roommates:", error);
-    res.status(500).json({ error: "Server error" });
+      console.error("Error fetching user:", error);
+      res.status(500).json({ error: "Server error" });
   }
 });
+
+
 
 // Update Roommate
 app.put("/roommates/:id", async (req, res) => {
