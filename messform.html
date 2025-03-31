@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
      
                  const result = await response.json();
                  alert(result.message || "Mess registered successfully!");
-     
+                 window.location.href = "messupdate.html";
                  if (response.ok) {
                      this.reset(); // Reset form after successful submission
                  }
