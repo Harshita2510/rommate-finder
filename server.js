@@ -80,8 +80,7 @@ const brokerSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   email: { type: String, required: true },
-  mobile: { type: String, required: true },
-  BrokerLicense: { type: String, required: true },
+  
   properttype: { type: String, required: true },
   location: { type: String, required: true },
 });
@@ -142,8 +141,7 @@ app.post("/brokerx", async (req, res) => {
       username,
       password,
       email,
-      mobile,
-      BrokerLicense,
+      
       properttype,
       location,
     } = req.body;
@@ -157,8 +155,7 @@ app.post("/brokerx", async (req, res) => {
       username,
       password,
       email,
-      mobile,
-      BrokerLicense,
+      
       properttype,
       location,
     });
