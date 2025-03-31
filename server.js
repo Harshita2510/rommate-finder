@@ -570,7 +570,7 @@ app.post("/register-mess", async (req, res) => {
 
     res.json({
       message: "Mess Registered Successfully!",
-      redirect: "somepage.html",
+      redirect: "messupdate.html",
     }); // Optional redirect
   } catch (error) {
     console.error("❌ Server error during mess registration:", error);
