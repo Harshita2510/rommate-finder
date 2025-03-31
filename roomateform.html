@@ -148,6 +148,7 @@
         
                     if (response.ok) {
                         alert("User added successfully!");
+                        window.location.href = "indexx.html";
                         form.reset();
                     } else {
                         alert("Error adding user.");
@@ -214,6 +215,7 @@
                         if (response.ok) {
                             alert("User updated successfully!");
                             location.reload();
+                            window.location.href = "indexx.html";
                         } else {
                             alert("Error updating user.");
                         }
