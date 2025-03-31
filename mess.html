@@ -21,7 +21,7 @@
                 <label>Mess Name: <input type="text" id="username" class="input-field" oninput="updateProgress()"></label>
                 <label>Password: <input type="text" id="password" class="input-field" oninput="updateProgress()"></label>
                 <label>Email: <input type="email" id="email" class="input-field" oninput="updateProgress()"></label>
-                <label>Mobile: <input type="tel" id="mobile" class="input-field" oninput="updateProgress()"></label>
+                <!-- <label>Mobile: <input type="tel" id="mobile" class="input-field" oninput="updateProgress()"></label> -->
                 <label>Address: <input type="text" id="place" class="input-field" oninput="updateProgress()"></label>
             </section>
             <button type="submit">Submit</button>
@@ -31,11 +31,11 @@
  async function mess() {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
-    const mobile = document.getElementById("mobile").value.trim();
+    // const mobile = document.getElementById("mobile").value.trim();
     const email = document.getElementById("email").value.trim();
     const place = document.getElementById("place").value.trim();
     
-    if (!username || !password || !mobile || !email || !place) {
+    if (!username || !password || !email || !place) {
         alert("All fields are required.");
         return;
     }
@@ -44,7 +44,7 @@
         const response = await fetch("http://localhost:3019/mess", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password, mobile, email, place })
+            body: JSON.stringify({ username, password, email, place })
         });
 
         const data = await response.json();

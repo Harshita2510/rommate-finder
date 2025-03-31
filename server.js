@@ -91,7 +91,7 @@ const Register = mongoose.model("brokerregistration", brokerSchema);
 const messSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  mobile: { type: String, required: true },
+
   email: { type: String, required: true, unique: true },
   place: { type: String, required: true },
 });
@@ -179,9 +179,9 @@ app.post("/brokerx", async (req, res) => {
 //mess registration
 app.post("/mess", async (req, res) => {
   try {
-    const { username, password, mobile, email, place } = req.body;
+    const { username, password, email, place } = req.body;
 
-    if (!username || !password || !mobile || !email || !place) {
+    if (!username || !password  || !email || !place) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
@@ -190,7 +190,7 @@ app.post("/mess", async (req, res) => {
       return res.status(400).json({ error: "Username already exists" });
     }
 
-    const newUser = new MESS({ username, password, mobile, email, place });
+    const newUser = new MESS({ username, password, email, place });
     await newUser.save();
     console.log("✅ User registered:", username);
     // console.log("Received registration request:", req.body);
