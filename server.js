@@ -369,6 +369,7 @@ app.put("/roommates/:id", async (req, res) => {
 const PropertySchema = new mongoose.Schema({
   brokerlis: { type: String, required: true }, // ✅ Broker License
   propertyName: { type: String, required: true },
+  contact: { type: String, required: true }, // Add this new field
   location: { type: String, required: true },
   price: { type: Number, required: true },
   propertyType: { type: String, required: true },
@@ -396,6 +397,7 @@ app.post("/propertyf", upload.single("image"), async (req, res) => {
     const {
       brokerlis,
       propertyName,
+      contact,
       location,
       price,
       type,
@@ -418,6 +420,7 @@ app.post("/propertyf", upload.single("image"), async (req, res) => {
       brokerlis, // ✅ Save broker license
       propertyName,
       location,
+      contact,
       price: Number(price),
       propertyType: type,
       bhk: propertyType === "Flat" ? Number(bhk) || null : null,

@@ -1,183 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Property Form</title>
     <style>
-  body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #f6f8f9 0%, #e5ebee 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 20px;
-}
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f6f8f9 0%, #e5ebee 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
 
-h2 {
-    text-align: center;
-    color: #003366;
-    font-size: 24px;
-    margin-bottom: 20px;
-    position: relative;
-}
+        h2 {
+            text-align: center;
+            color: #003366;
+            font-size: 24px;
+            margin-bottom: 20px;
+            position: relative;
+        }
 
-h2::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background-color: #007bff;
-}
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #007bff;
+        }
 
-form {
-    background: white;
-    width: 100%;
-    max-width: 600px;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border: 2px solid #007bff;
-}
+        form {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #007bff;
+        }
 
-label {
-    font-weight: bold;
-    color: #003366;
-    display: block;
-    margin-top: 10px;
-}
+        label {
+            font-weight: bold;
+            color: #003366;
+            display: block;
+            margin-top: 10px;
+        }
 
-input, 
-select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-}
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
 
-.services-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-}
+        .services-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
 
-.service-item {
-    background-color: #f8f9fa;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: background-color 0.3s ease;
-}
+        .service-item {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
 
-.service-item:hover {
-    background-color: #e9ecef;
-}
+        .service-item:hover {
+            background-color: #e9ecef;
+        }
 
-.service-item input[type="checkbox"] {
-    margin-right: 8px;
-    width: auto;
-    margin-top: 0;
-}
+        .service-item input[type="checkbox"] {
+            margin-right: 8px;
+            width: auto;
+            margin-top: 0;
+        }
 
-#preview {
-    margin-top: 10px;
-    max-width: 100%;
-    border-radius: 5px;
-}
+        #preview {
+            margin-top: 10px;
+            max-width: 100%;
+            border-radius: 5px;
+        }
 
-button {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin-top: 15px;
-    background-color: #0056b3;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background-color: #0056b3;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
 
-button:hover {
-    background-color: #004494;
-}
+        button:hover {
+            background-color: #004494;
+        }
 
-@media (max-width: 600px) {
-    form {
-        width: 100%;
-        padding: 20px;
-    }
+        @media (max-width: 600px) {
+            form {
+                width: 100%;
+                padding: 20px;
+            }
 
-    .services-container {
-        flex-direction: column;
-    }
+            .services-container {
+                flex-direction: column;
+            }
 
-    .service-item {
-        width: 100%;
-    }
-}</style>
+            .service-item {
+                width: 100%;
+            }
+        }
+    </style>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let form = document.getElementById("propertyForm");
-            
+
             if (form) {  // Ensure form exists before adding event listener
                 form.addEventListener("submit", function (event) {
                     event.preventDefault(); // Prevent page refresh
-    
+
                     let formData = new FormData(form);
-    
+
                     fetch("http://localhost:3019/propertyf", {  // ✅ Correct: Direct request to backend
-    method: "POST",
-    body: formData
-})
-   .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! Status: ${response.status}`);
-                        }
-                        return response.text(); // Use text() instead of json() to debug
+                        method: "POST",
+                        body: formData
                     })
-                    .then(text => {
-                        try {
-                            let data = JSON.parse(text); // Convert to JSON
-                            console.log("Response from server:", data);
-                            alert(data.message);
-                        } catch (error) {
-                            console.error("JSON Parsing Error:", error, "Response Text:", text);
-                            alert("Unexpected response format. Check the server.");
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Fetch error:", error);
-                        alert("Submission failed. Check console for details.");
-                    });
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! Status: ${response.status}`);
+                            }
+                            return response.text(); // Use text() instead of json() to debug
+                        })
+                        .then(text => {
+                            try {
+                                let data = JSON.parse(text); // Convert to JSON
+                                console.log("Response from server:", data);
+                                alert(data.message);
+                            } catch (error) {
+                                console.error("JSON Parsing Error:", error, "Response Text:", text);
+                                alert("Unexpected response format. Check the server.");
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Fetch error:", error);
+                            alert("Submission failed. Check console for details.");
+                        });
                 });
             } else {
                 console.error("Form element not found!");
             }
         });
-    
+
         function previewImage(event) {
             let reader = new FileReader();
-            reader.onload = function(){
+            reader.onload = function () {
                 let output = document.getElementById("preview");
                 output.src = reader.result;
                 output.style.display = "block";
             };
             reader.readAsDataURL(event.target.files[0]);
         }
-    
+
         function toggleFields() {
             let propertyType = document.getElementById("type").value;
             document.getElementById("bhkField").style.display = propertyType === "Flat" ? "block" : "none";
@@ -185,8 +187,9 @@ button:hover {
             document.getElementById("roomsField").style.display = propertyType === "PG" ? "block" : "none";
         }
     </script>
-    
+
 </head>
+
 <body>
     <h2>Submit Property Details</h2>
     <form id="propertyForm" enctype="multipart/form-data">
@@ -195,10 +198,13 @@ button:hover {
 
         <label for="propertyName">Property Name:</label>
         <input type="text" id="propertyName" name="propertyName" required>
+        <!-- Add this after the "Broker License" field -->
+        <label for="contact">Broker Contact Number:</label>
+        <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" required>
 
         <label for="location">Location:</label>
         <input type="text" id="location" name="location" required>
-        
+
         <label for="price">Price:</label>
         <input type="number" id="price" name="price" required>
 
@@ -217,7 +223,7 @@ button:hover {
             <label for="beds">Number of Beds Available:</label>
             <input type="number" id="beds" name="beds" min="1">
         </div>
-        
+
         <div id="roomsField" style="display: none;">
             <label for="rooms">Number of Rooms Available:</label>
             <input type="number" id="rooms" name="rooms" min="1">
@@ -228,7 +234,7 @@ button:hover {
             <option value="Available">Available</option>
             <option value="Not Available">Not Available</option>
         </select>
-        
+
         <label for="gender">For:</label>
         <select id="gender" name="gender" required>
             <option value="Girls">Girls</option>
@@ -238,12 +244,17 @@ button:hover {
 
         <label>Services Offered:</label>
         <div class="services-container">
-            <label class="service-item"><input type="checkbox" name="services" value="High-Speed Wi-Fi"> High-Speed Wi-Fi</label>
+            <label class="service-item"><input type="checkbox" name="services" value="High-Speed Wi-Fi"> High-Speed
+                Wi-Fi</label>
             <label class="service-item"><input type="checkbox" name="services" value="Furnished"> Furnished</label>
-            <label class="service-item"><input type="checkbox" name="services" value="Camera Security"> Camera Security</label>
-            <label class="service-item"><input type="checkbox" name="services" value="Washing Machine"> Washing Machine</label>
-            <label class="service-item"><input type="checkbox" name="services" value="Purified Water"> Purified Water</label>
-            <label class="service-item"><input type="checkbox" name="services" value="Professional Housekeeping"> Professional Housekeeping</label>
+            <label class="service-item"><input type="checkbox" name="services" value="Camera Security"> Camera
+                Security</label>
+            <label class="service-item"><input type="checkbox" name="services" value="Washing Machine"> Washing
+                Machine</label>
+            <label class="service-item"><input type="checkbox" name="services" value="Purified Water"> Purified
+                Water</label>
+            <label class="service-item"><input type="checkbox" name="services" value="Professional Housekeeping">
+                Professional Housekeeping</label>
         </div>
 
         <label for="image">Upload Image:</label>
@@ -253,4 +264,5 @@ button:hover {
         <button type="submit">Submit</button>
     </form>
 </body>
+
 </html>
