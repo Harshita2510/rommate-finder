@@ -5,31 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roommate Form</title>
-
-    <!-- <style>
+    <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: #f6f8f9;
         }
         form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
             max-width: 400px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
         }
         label {
-            font-weight: bold;
             display: block;
+            font-weight: bold;
             margin-top: 10px;
         }
         input, select, textarea {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
         }
         button {
             margin-top: 15px;
@@ -40,158 +42,17 @@
             border-radius: 4px;
             cursor: pointer;
         }
-        
-    </style> -->
-
-    <style>
-     body {
-    font-family: 'Inter', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background: linear-gradient(135deg, #f6f8f9 0%, #e5ebee 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 20px;
-}
-
-form {
-    background: white;
-    width: 100%;
-    max-width: 500px;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.08),
-        0 10px 20px rgba(0, 0, 0, 0.05);
-    position: relative;
-    overflow: hidden;
-    border: none;
-}
-
-form::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 6px;
-    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-}
-
-h2 {
-    text-align: center;
-    color: #2c3e50;
-    font-size: 26px;
-    margin-bottom: 30px;
-    position: relative;
-}
-
-h2::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 3px;
-    background-color: #3498db;
-}
-
-label {
-    font-weight: 600;
-    color: #34495e;
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 8px;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-input, 
-select, 
-textarea {
-    width: 100%;
-    padding: 12px;
-    margin-top: 8px;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    font-size: 15px;
-    transition: all 0.3s ease;
-    outline: none;
-}
-
-input:focus, 
-select:focus, 
-textarea:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
-}
-
-select {
-    appearance: none;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M1 4l5 5 5-5' fill='none' stroke='%23888' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 15px center;
-    background-size: 12px;
-    padding-right: 35px;
-}
-
-textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-
-button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    margin-top: 30px;
-    background-color: #3498db;
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-}
-
-button:hover {
-    background-color: #2980b9;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-@media (max-width: 600px) {
-    form {
-        width: 100%;
-        margin: 20px;
-        padding: 30px 25px;
-    }
-
-    input, 
-    select, 
-    textarea {
-        padding: 10px;
-    }
-
-    button {
-        padding: 12px;
-    }
-}
     </style>
-
-
 </head>
 
 <body>
 
-    <!-- <h2>Roommate Preference Form</h2> -->
-    <form id="roommateForm"> <!-- ✅ Added missing ID here -->
-        <label for="name">Name:</label>
+    <form id="roommateForm">
+        <label for="name">Unique Id:</label>
         <input type="text" id="name" name="name" required>
+
+        <label for="name1">Name:</label>
+        <input type="text" id="name1" name="name1" required>
 
         <label for="gender">Gender:</label>
         <select id="gender" name="gender" required>
@@ -203,9 +64,6 @@ button:hover {
         <label for="hobby">Hobby:</label>
         <input type="text" id="hobby" name="hobby" required>
 
-        <!-- <label for="course">Course:</label>
-        <input type="text" id="course" name="course" required> -->
-
         <label for="course">Course:</label>
         <select id="course" name="course" required>
             <option value="b.tech">B.Tech</option>
@@ -213,7 +71,6 @@ button:hover {
             <option value="mba">MBA</option>
             <option value="law">Law</option>
         </select>
-
 
         <label for="food">Food Preference:</label>
         <select id="food" name="food" required>
@@ -237,95 +94,136 @@ button:hover {
         </select>
 
         <label for="note">Additional Note:</label>
-        <textarea id="note" name="note" rows="3"
-            placeholder="Looking for a roommate with similar interests."></textarea>
+        <textarea id="note" name="note" rows="3"></textarea>
 
-        <button type="submit">Submit</button>
-        <button id="updateBtn">update</button>
+        <button type="submit" id="submitBtn">Submit</button>
+        <button id="updateBtn">Update</button>
     </form>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("roommateForm");
-    const updateBtn = document.getElementById("updateBtn");
-    let userId = null; // Store user ID for updating
-
-    // 🔹 Step 1: Fetch user data when clicking "Update"
-    updateBtn.addEventListener("click", async function (event) {
-        event.preventDefault();
-
-        if (!userId) {
-            // Fetch user details (First Click)
-            const name = document.getElementById("name").value.trim();
-            if (!name) {
-                alert("Please enter a name to fetch details.");
-                return;
-            }
-
-            try {
-                const response = await fetch(`http://localhost:3019/getUser?name=${name}`);
-                const responseData = await response.json();
-
-                if (response.ok && responseData.data) {
-                    const userData = responseData.data;
-                    userId = userData._id; // Store user ID for update
-
-                    // Populate form with fetched data
-                    document.getElementById("gender").value = userData.gender || "";
-                    document.getElementById("hobby").value = userData.hobby || "";
-                    document.getElementById("course").value = userData.course || "";
-                    document.getElementById("food").value = userData.food || "";
-                    document.getElementById("bhk").value = userData.bhk || "";
-                    document.getElementById("type").value = userData.type || "";
-                    document.getElementById("note").value = userData.note || "";
-
-                    // Change button text to indicate update action
-                    updateBtn.textContent = "Save Changes";
-                } else {
-                    alert("User not found.");
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("roommateForm");
+            const updateBtn = document.getElementById("updateBtn");
+            let userId = null; // Store user ID for updating
+        
+            form.addEventListener("submit", async function (event) {
+                event.preventDefault();
+        
+                const name = document.getElementById("name").value.trim();
+                if (!name) {
+                    alert("Unique ID is required.");
+                    return;
                 }
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-                alert("Error fetching user data. Please try again.");
-            }
-        } else {
-            // 🔹 Step 2: Update user details (Second Click)
-            const updatedData = {
-                name: document.getElementById("name").value,
-                gender: document.getElementById("gender").value,
-                hobby: document.getElementById("hobby").value,
-                course: document.getElementById("course").value,
-                food: document.getElementById("food").value,
-                bhk: document.getElementById("bhk").value,
-                type: document.getElementById("type").value,
-                note: document.getElementById("note").value
-            };
-
-            try {
-                const response = await fetch(`http://localhost:3019/roommates/${userId}`, {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(updatedData),
-                });
-
-                const result = await response.json();
-                if (response.ok) {
-                    alert("User updated successfully!");
-                    window.location.reload(); // Refresh after update
-                } else {
-                    alert("Error updating user: " + result.message);
+        
+                try {
+                    const checkResponse = await fetch(`http://localhost:3019/getUser?name=${name}`);
+                    const checkData = await checkResponse.json();
+        
+                    if (checkResponse.ok && checkData.data) {
+                        alert("User already exists.");
+                        return;
+                    }
+                } catch (error) {
+                    console.error("Error checking user:", error);
                 }
-            } catch (error) {
-                console.error("Error updating user:", error);
-                alert("Error updating user. Please try again.");
-            }
-        }
-    });
-});
-
-
-    </script>
-    
+        
+                const newUser = {
+                    name,
+                    name1: document.getElementById("name1").value,
+                    gender: document.getElementById("gender").value,
+                    hobby: document.getElementById("hobby").value,
+                    course: document.getElementById("course").value,
+                    food: document.getElementById("food").value,
+                    bhk: document.getElementById("bhk").value,
+                    type: document.getElementById("type").value,
+                    note: document.getElementById("note").value
+                };
+        
+                try {
+                    const response = await fetch("http://localhost:3019/submit", {  // 🔹 Fixed URL
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(newUser)
+                    });
+        
+                    if (response.ok) {
+                        alert("User added successfully!");
+                        form.reset();
+                    } else {
+                        alert("Error adding user.");
+                    }
+                } catch (error) {
+                    console.error("Error adding user:", error);
+                }
+            });
+        
+            updateBtn.addEventListener("click", async function (event) {
+                event.preventDefault();
+                const name = document.getElementById("name").value.trim();
+        
+                if (!userId) {
+                    if (!name) {
+                        alert("Please enter a Unique ID to fetch details.");
+                        return;
+                    }
+        
+                    try {
+                        const response = await fetch(`http://localhost:3019/getUser?name=${name}`);
+                        const responseData = await response.json();
+        
+                        if (response.ok && responseData.data) {
+                            const userData = responseData.data;
+                            userId = userData._id; // Store ID for update
+        
+                            document.getElementById("name1").value = userData.name1 || "";
+                            document.getElementById("gender").value = userData.gender || "";
+                            document.getElementById("hobby").value = userData.hobby || "";
+                            document.getElementById("course").value = userData.course || "";
+                            document.getElementById("food").value = userData.food || "";
+                            document.getElementById("bhk").value = userData.bhk || "";
+                            document.getElementById("type").value = userData.type || "";
+                            document.getElementById("note").value = userData.note || "";
+        
+                            updateBtn.textContent = "Save Changes";
+                        } else {
+                            alert("User not found.");
+                        }
+                    } catch (error) {
+                        console.error("Error fetching user:", error);
+                    }
+                } else {
+                    const updatedUser = {
+                        name,
+                        name1: document.getElementById("name1").value,
+                        gender: document.getElementById("gender").value,
+                        hobby: document.getElementById("hobby").value,
+                        course: document.getElementById("course").value,
+                        food: document.getElementById("food").value,
+                        bhk: document.getElementById("bhk").value,
+                        type: document.getElementById("type").value,
+                        note: document.getElementById("note").value
+                    };
+        
+                    try {
+                        const response = await fetch(`http://localhost:3019/roommates/${userId}`, {
+                            method: "PUT",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(updatedUser)
+                        });
+        
+                        if (response.ok) {
+                            alert("User updated successfully!");
+                            location.reload();
+                        } else {
+                            alert("Error updating user.");
+                        }
+                    } catch (error) {
+                        console.error("Error updating user:", error);
+                    }
+                }
+            });
+        });
+        </script>
+        
 </body>
-
 </html>

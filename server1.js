@@ -10,7 +10,7 @@ const fs = require("fs");
 
 // Middleware
 // Add this ABOVE your routes
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
@@ -123,18 +123,14 @@ app.post("/register", async (req, res) => {
   }
 });
 
-
-
 // Broker Registration
 app.post("/brokerx", async (req, res) => {
   console.log("Received request body:", req.body);
 
   if (!req.body || Object.keys(req.body).length === 0) {
-    return res
-      .status(400)
-      .json({
-        error: "Request body is empty. Check if JSON middleware is enabled.",
-      });
+    return res.status(400).json({
+      error: "Request body is empty. Check if JSON middleware is enabled.",
+    });
   }
 
   try {
@@ -164,15 +160,22 @@ app.post("/brokerx", async (req, res) => {
     });
     await newBroker.save();
 
-    res
-      .status(201)
-      .json({
-        message: "Broker registered successfully",
-        redirect: "login.html",
-      });
+    res.status(201).json({
+      message: "Broker registered successfully",
+      redirect: "login.html",
+    });
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+app.get("/roommates", async (req, res) => {
+  try {
+    const roommates = await Roommate.find();
+    res.json(roommates);
+  } catch (error) {
+    console.error("❌ Error fetching roommates:", error);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
@@ -219,24 +222,20 @@ app.post("/login", async (req, res) => {
     // Check in Broker Database
     user = await Register.findOne({ username });
     if (user && user.password === password) {
-      return res
-        .status(200)
-        .json({
-          success: true,
-          role: "broker",
-          redirect: "propertyFilter.html",
-        });
+      return res.status(200).json({
+        success: true,
+        role: "broker",
+        redirect: "propertyFilter.html",
+      });
     }
 
     user = await MESS.findOne({ username });
     if (user && user.password === password) {
-      return res
-        .status(200)
-        .json({
-          success: true,
-          role: "messowner",
-          redirect: "messupdate.html",
-        });
+      return res.status(200).json({
+        success: true,
+        role: "messowner",
+        redirect: "messupdate.html",
+      });
     }
 
     return res
@@ -252,7 +251,6 @@ app.post("/login", async (req, res) => {
 
 // Roommate Schema & Model
 const roommateSchema = new mongoose.Schema({
-  name1:String,
   name: String,
   gender: String,
   hobby: String,
@@ -261,7 +259,7 @@ const roommateSchema = new mongoose.Schema({
   bhk: String,
   type: String,
   note: String,
-  user_id:String
+  user_id: String,
 });
 const Roommate = mongoose.model("Roommate", roommateSchema);
 
@@ -280,26 +278,27 @@ const Roommate = mongoose.model("Roommate", roommateSchema);
 //     }
 // });
 
-
 // Modified /submit route to update existing document
 app.post("/submit", async (req, res) => {
   try {
     console.log(req.body);
-    const { name, name1, gender, hobby, course, food, bhk, type, note } = req.body;
+    const { name, gender, hobby, course, food, bhk, type, note } = req.body;
 
+    // Check if a document with this username already exists
     let existingUser = await Roommate.findOne({ name });
 
     if (existingUser) {
+      // If user exists, return their data to pre-fill the form
       console.log("✅ User found:", name);
       return res.json({
-        message: "User already exists",
+        message: "User data retrieved",
         data: existingUser,
       });
     }
 
+    // If user does not exist, create a new entry
     const newUser = new Roommate({
       name,
-      name1,
       gender,
       hobby,
       course,
@@ -316,14 +315,12 @@ app.post("/submit", async (req, res) => {
       message: "Registration successful",
       data: newUser,
     });
-
   } catch (error) {
     console.error("❌ Error processing request:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
 
-// Get User
 app.get("/getUser", async (req, res) => {
   try {
     const { name } = req.query;
@@ -339,14 +336,13 @@ app.get("/getUser", async (req, res) => {
     }
 
     res.json({ message: "User found", data: user });
-
   } catch (error) {
     console.error("Error fetching user:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
 
-// Update User
+// Update Roommate
 app.put("/roommates/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -491,15 +487,6 @@ app.get("/get-properties/:brokerlis", async (req, res) => {
   } catch (error) {
     console.error("Error fetching properties:", error);
     res.status(500).json({ message: "Internal Server Error" });
-  }
-});
-app.get("/roommates", async (req, res) => {
-  try {
-    const roommates = await Roommate.find();
-    res.json(roommates);
-  } catch (error) {
-    console.error("❌ Error fetching roommates:", error);
-    res.status(500).json({ error: "Server error" });
   }
 });
 
