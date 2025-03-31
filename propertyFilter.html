@@ -293,47 +293,48 @@
         }
     }
 
-    function editProperty(id, propertyName, location, price, availability, beds, rooms) {
-        document.getElementById("edit-form").style.display = "block";
-        document.getElementById("edit-id").value = id;
-        document.getElementById("edit-propertyName").value = propertyName;
-        document.getElementById("edit-location").value = location;
-        document.getElementById("edit-price").value = price;
-        document.getElementById("edit-availability").value = availability;
-        document.getElementById("edit-beds").value = beds;
-        document.getElementById("edit-rooms").value = rooms;
-    }
+    function editProperty(id, propertyName, location, price, availability, beds = "", rooms = "") {
+    document.getElementById("edit-form").style.display = "block";
+    document.getElementById("edit-id").value = id;
+    document.getElementById("edit-propertyName").value = propertyName;
+    document.getElementById("edit-location").value = location;
+    document.getElementById("edit-price").value = price;
+    document.getElementById("edit-availability").value = availability;
+    document.getElementById("edit-beds").value = beds || "";
+    document.getElementById("edit-rooms").value = rooms || "";
+}
 
-    async function updateProperty(event) {
-        event.preventDefault();
-        const id = document.getElementById("edit-id").value;
-        const updatedData = {
-            propertyName: document.getElementById("edit-propertyName").value,
-            location: document.getElementById("edit-location").value,
-            price: document.getElementById("edit-price").value,
-            availability: document.getElementById("edit-availability").value,
-            beds: document.getElementById("edit-beds").value,
-            rooms: document.getElementById("edit-rooms").value
-        };
+async function updateProperty(event) {
+    event.preventDefault();
+    const id = document.getElementById("edit-id").value;
+    const updatedData = {
+        propertyName: document.getElementById("edit-propertyName").value || null,
+        location: document.getElementById("edit-location").value || null,
+        price: document.getElementById("edit-price").value || null,
+        availability: document.getElementById("edit-availability").value || null,
+        beds: document.getElementById("edit-beds").value || null,
+        rooms: document.getElementById("edit-rooms").value || null
+    };
 
-        try {
-            const response = await fetch(`http://localhost:3019/update-property/${id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(updatedData),
-            });
+    try {
+        const response = await fetch(`http://localhost:3019/update-property/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updatedData),
+        });
 
-            if (response.ok) {
-                alert("Property updated successfully!");
-                document.getElementById("edit-form").style.display = "none";
-                fetchProperties();
-            } else {
-                alert("Failed to update property");
-            }
-        } catch (error) {
-            console.error("Error updating property:", error);
+        if (response.ok) {
+            alert("Property updated successfully!");
+            document.getElementById("edit-form").style.display = "none";
+            fetchProperties();
+        } else {
+            alert("Failed to update property");
         }
+    } catch (error) {
+        console.error("Error updating property:", error);
     }
+}
+
     </script>
 
 </body>
