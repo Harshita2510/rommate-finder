@@ -11,12 +11,12 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color: #F1F2F6;
 }
 
 /* Header */
 header {
-    background-color: #007bff;
+    background-color: #45B0B0;
     color: white;
     text-align: center;
     padding: 15px;
@@ -36,7 +36,7 @@ main {
     background: white;
     padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 255, 0.2);
+    box-shadow: 0 0 10px rgba(142, 232, 248, 0.2);
     width: 90%;
     max-width: 400px;
     text-align: center;
@@ -50,7 +50,7 @@ main {
 
 label {
     font-weight: bold;
-    color: #0d47a1;
+    color: #45B0B0;
 }
 
 select {
@@ -60,7 +60,7 @@ select {
     border: 1px solid #64b5f6;
     border-radius: 5px;
     background-color: #e3f2fd;
-    color: #0d47a1;
+    color: #45B0B0;
     font-size: 16px;
 }
 
@@ -75,7 +75,7 @@ select {
 button {
     margin-top: 20px;
     padding: 14px;
-    background: #007bff;
+    background: #45B0B0;
     color: white;
     border: none;
     cursor: pointer;
@@ -85,7 +85,7 @@ button {
 }
 
 button:hover {
-    background: #0056b3;
+    background: #45B0B0;
 }
 
 /* Footer */

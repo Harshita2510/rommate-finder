@@ -7,7 +7,7 @@
     <!-- <link rel="stylesheet" href="style.css">
     -->
     <link rel="stylesheet" href="brokerf.css">
-    <!-- <style>
+ <style>
         /* Page Background */
         /*body {
     font-family: Arial, sans-serif;
@@ -83,6 +83,7 @@ body {
     margin: auto;
     background: white;
     padding: 20px;
+    display: flex;
     border-radius: 10px;
     box-shadow: 0px 0px 10px #ccc;
 }
@@ -96,11 +97,30 @@ body {
     position: relative;
     margin-bottom: 20px;
 }
+.form{
+    flex: 70%;
+   
+}
+.image{
+    flex: 30%;
+    text-align: center;
+    
+    padding: 20px;
+    background-color: #D1EAF0;
+    object-fit: cover;
+    border-right: 2px solid #7CB9E8;
+}
+.pimg{
+    width: 300px;
+    height: 250px;
+   
+    margin-top: 150px;
+}
 
 .progress-bar {
     height: 100%;
     width: 0%;
-    background: green;
+    background: #73C7C7;
     border-radius: 5px;
     transition: width 0.3s ease-in-out;
 }
@@ -125,7 +145,7 @@ body {
 button {
     width: calc(100% - 20px); 
     padding: 10px;
-    background: green;
+    background: #73C7C7;
     color: white;
     border: none;
     cursor: pointer;
@@ -133,12 +153,14 @@ button {
     box-sizing: border-box;
 }
 
-    </style> -->
+    </style> 
 
 
 </head>
 <body>
     <div class="container">
+        <div class = "image"> <img src="https://media.istockphoto.com/id/1359362604/vector/woman-filling-form.jpg?s=612x612&w=0&k=20&c=tUIAiwUal8wNbSU2M-6o5nw7eK3kMNho8yFQUQ8I1O0=" alt="Hostel Room" class = "pimg"></div>
+       <div class = "form">
         <div class="progress-container">
             <div class="progress-bar" id="progress-bar"></div>
             <span id="progress-text">0% completed</span>
@@ -155,8 +177,8 @@ button {
         <label>Password</label>
         <div class="password-container">
             <input type="password" id="password" class="input-field" oninput="updateProgress()" required>
-            <input type="checkbox" onclick="togglePassword()"> show
         </div>
+        
     </div>
 
 <div>
@@ -177,6 +199,7 @@ button {
         
         <button type="submit">Register</button>
     </form>
+    </div>
     </div>
 
     <script>
